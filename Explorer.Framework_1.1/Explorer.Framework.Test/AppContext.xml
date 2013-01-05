@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppContext>
+    <!-- 项目自定义配置 -->
+    <Configuration>
+        <AppSettings Name="User">
+            <Add Key="Admin" Value="Password"/>
+        </AppSettings>
+    </Configuration>
+    <!--
+        日志配置            
+        Level:
+            Debug     调试信息
+            Info      基本信息
+            Warn      警告信息
+            Error     错误信息
+            
+        Type: 
+            Text      文本文件类型
+            DataBase  数据库类型
+            Xml       Xml文件类型
+            Proxy     
+            
+        Property.Template: 日志输出样式
+                    Type=Text     时自由组合变量符, 例如 [${Time}][${Level}][${TypeName}]${NewLine}${Message}${Guid}
+                    Type=DataBase 时 字段名=变量符, 例如 DateTime=${DateTime},Lv=${Level},TypeName=${TypeName},Message=${Message}
+                    Type=Xml      时 {#节点名[@属性名1=变量符,@属性名2=变量符]{#节点名[@属性名1=变量符,@属性名2=变量符]}}
+                    
+        Property.Position: 日志输出位置
+                    Type=Text,Xml  时是文件输出的位置, 例如 ${Path}${Date}.log.txt
+                    Type=DataBase  时对应的数据表名称, 例如 TLogData
+        
+        Property.ConnectionString:     Mode 为 DataBase 指定数据库连接字符串
+        
+        Property.DataBaseType:         Mode 为 DataBase 指定数据库类型, 默认是 Sql 类型
+                    Sql            
+                    OleDb
+                    Oracle                   
+                    
+        Property.Proxy:                Type 为 Proxy 时 Include 为其他 Logger.Name
+    -->
+    <LoggerContext Default="LoggerText">
+        <Logger Name="LoggerProxy" Type="Proxy" OutputConsole="true">
+            <Property Name="Proxy">LoggerText,LoggerDB1,LoggerDB1,LoggerXml</Property>         
+        </Logger>
+        <Logger Name="LoggerDB2" Type="DataBase" OutputConsole="true">
+            <Property Name="Level">Debug,Info,Warn,Error</Property>
+            <Property Name="Template">NUM='0',APPLICATION='AppName',Thread_Name='${ThreadName}',INSERT_TIME='${DateTime}',Lv='${Level}',Class_Type='${TypeName}',Message=${Guid},Exception='${Exception}'</Property>
+            <Property Name="Position">Sys_Log</Property>
+            <Property Name="DataBaseType">Sql</Property>
+            <Property Name="ConnectionString">server=6.110.102.138;uid=sa;pwd=qwe123$%^;database=AISBaseDB;enlist=true</Property>
+        </Logger>
+        <!--
+        <Logger Name="LoggerText" Type="Text" OutputConsole="true">
+            <Property Name="Level">Debug,Info,Warn,Error</Property>
+            <Property Name="Template">[${DateTime}][${Level}][${TypeName}]${NewLine}${Message}${NewLine}${Exception}</Property>
+            <Property Name="Position">${Path}${Date}.log.txt</Property>
+        </Logger>
+        <Logger Name="LoggerDB1" Type="DataBase" OutputConsole="true">
+            <Property Name="Level">Debug,Info,Warn,Error</Property>
+            <Property Name="Template">DateTime=${DateTime},Level=${Level},TypeName=${TypeName},Message=${Message},Exception=${Exception}</Property>
+            <Property Name="Position">SystemLog</Property>
+            <Property Name="DataSource">Gps</Property>
+        </Logger>
+        <Logger Name="LoggerDB2" Type="DataBase" OutputConsole="true">
+            <Property Name="Level">Debug,Info,Warn,Error</Property>
+            <Property Name="Template">DateTime=${DateTime},Level=${Level},TypeName=${TypeName},Message=${Message},Exception=${Exception}</Property>
+            <Property Name="Position">SystemLog</Property>
+            <Property Name="DataBaseType">Sql</Property>
+            <Property Name="ConnectionString">Data Source=6.100.4.84;Initial Catalog=TXServer;Persist Security Info=True;User ID=sa;Password=gpsnbeport</Property>
+        </Logger>
+        <Logger Name="LoggerXml" Mode="Local" Type="Xml" OutputConsole="true">
+            <Property Name="Level">Debug,Info,Warn,Error</Property>
+            <Property Name="Template">{"LogItem": {"@DateTime":"${DateTime}","@Level": "${Level}", "TypeName": "${TypeName}", "Message": "${Message}", "Exception": "${Exception}"}}</Property>
+            <Property Name="Position">${Path}${Date}.log.xml</Property>
+        </Logger>
+        -->
+    </LoggerContext>
+    <!--
+        数据库配置
+        Mode:
+            Local
+            Remoting
+            Service
+        
+        DataBase:
+            Sql            
+            OleDb
+            Oracle (.Net 提供的驱动)
+            Odac   (Oracle 提供的驱动)
+            SQLite (SQLite 提供的驱动)
+        
+        Property.ConnectionString:
+        
+        Property.Host:
+        
+        Property.Port:
+        
+        Property.Channel:
+    -->
+    <DataSourceContext Default="Gps">
+        <DataSource Name="Odac" Mode="Local" DataBase="Odac">
+            <Property Name="ConnectionString">Data Source=AP;User ID=gps_proj;password=gpsild2010;</Property>
+        </DataSource>
+        <DataSource Name="Gps" Mode="Local" DataBase="Sql">
+            <Property Name="ConnectionString">Data Source=6.100.4.84;Initial Catalog=TXServer;Persist Security Info=True;User ID=sa;Password=gpsnbeport</Property>
+        </DataSource>
+    </DataSourceContext>
+    <!--
+        BLA: 业务逻辑组件: BusinessLogicAssembly
+            Mode: 
+                Http.Client:   采用 Http 模式从远程调用业务逻辑
+                Http.Server:   采用 Http 模式从注册业务逻辑服务
+                Remoting.Client.Tcp:  采用 Remoting 模式从远程调用业务逻辑
+                Remoting.Server.Http: 采用 Remoting 模式从注册业务逻辑服务
+                WS.Client: 采用 WebService 模式从远程调用业务逻辑
+                WS.Server: 采用 WebService 模式从注册业务逻辑服务
+                Local: 采用本地引用的模式调用业务逻辑                
+            Name :                 
+                
+            Version:
+                版本 YYYYMMDDHHMMSS
+        BLH: 业务逻辑对象
+
+    -->
+    <EntityContext>
+        <Entity Path="${Path}\Entity"/>
+    </EntityContext>
+    <BusinessContext>
+        <!-- 本地服务调用 SERVER 1 -->
+        <Bla Mode="Local" Name="Explorer.Framework.BLLExample.dll" Version="20110513110753" Port="9001">
+            <Blh Name="Test.Blh1" DbName="Gps" TransactionMode="true" Enabled="true" Provider="Explorer.Framework.BLLExample.Test1BLH"/>
+            <Blh Name="Test.Blh2" DbName="Gps" TransactionMode="false" Enabled="true" Provider="Explorer.Framework.BLLExample.Test2BLH"/>
+        </Bla>
+        <Bla Mode="Local" Name="Explorer.Framework.BLLExample.dll" Version="20110513110754" Port="9001">
+            <Blh Name="Test.Blh1" DbName="Gps" TransactionMode="true" Enabled="true" Provider="Explorer.Framework.BLLExample.Test1BLH"/>
+            <Blh Name="Test.Blh2" DbName="Gps" TransactionMode="false" Enabled="true" Provider="Explorer.Framework.BLLExample.Test2BLH"/>
+        </Bla>
+        <Bla Mode="Local" Name="Explorer.Framework.BLLExample.dll" Port="9001">
+            <Blh Name="Test.Blh1" DbName="Gps" TransactionMode="true" Enabled="true" Provider="Explorer.Framework.BLLExample.Test1BLH"/>
+            <Blh Name="Test.Blh2" DbName="Gps" TransactionMode="false" Enabled="true" Provider="Explorer.Framework.BLLExample.Test2BLH"/>
+        </Bla>
+    </BusinessContext>
+    <AutoService>
+        <ServiceItem ServiceSpace="" Name="">
+            <ItemContext>
+                <Filename></Filename>
+                <ClassName></ClassName>
+            </ItemContext>
+            <Parameter>
+                <Property Name=""></Property>
+            </Parameter>
+        </ServiceItem>
+    </AutoService>
+</AppContext>

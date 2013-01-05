@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2316F2ED-0BBD-4333-AF3B-0150E1E2070A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Explorer.Framework.BLLExample</RootNamespace>
+    <AssemblyName>Explorer.Framework.BLLExample</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\OutPut\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BLOExample.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Test1BLH.cs" />
+    <Compile Include="Test2BLH.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Explorer.Framework.Business.Base\Explorer.Framework.Business.Base.csproj">
+      <Project>{93B3D775-2DF1-40F3-BD5F-AB65E94ED2BA}</Project>
+      <Name>Explorer.Framework.Business.Base</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Framework.Common\Explorer.Framework.Common.csproj">
+      <Project>{6B6C864A-9C03-408C-BC21-22771F2F59F5}</Project>
+      <Name>Explorer.Framework.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Framework.Core\Explorer.Framework.Core.csproj">
+      <Project>{AF211D94-90DF-497A-9668-A44B88632A8D}</Project>
+      <Name>Explorer.Framework.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Framework.Data\Explorer.Framework.Data.csproj">
+      <Project>{680B2E05-53C3-4B85-AC52-1953D9CFD5C5}</Project>
+      <Name>Explorer.Framework.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Explorer.Framework.Logger\Explorer.Framework.Logger.csproj">
+      <Project>{8F043114-B94C-4104-BEAA-27DF93942762}</Project>
+      <Name>Explorer.Framework.Logger</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

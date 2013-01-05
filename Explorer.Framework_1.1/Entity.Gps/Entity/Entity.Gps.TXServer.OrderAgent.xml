@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entity NameSpace="Entity.Gps.TXServer" Name="OrderAgent" Table="orderAgent">
+    <Proptery Name="OrderAgentId" Column="orderAgentId" IsIdentity="true" IsAutoFill="true" IsPrimaryKey="true" DbType="System.Data.DbType.Int32" PropteryType="System.Int32"/>
+    <Proptery Name="OrderAgentName" Column="orderAgentName" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="OrderAgentNo" Column="orderAgentNo" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="LinkMan" Column="linkMan" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="Telephone" Column="telephone" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="Remark" Column="remark" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="VGroupID" Column="VGroupID" DbType="System.Data.DbType.Int64" PropteryType="System.Int64"/>
+    <Proptery Name="Fax" Column="fax" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="mobile" Column="mobile" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+    <Proptery Name="address" Column="address" DbType="System.Data.DbType.String" PropteryType="System.String"/>
+</Entity>
+
